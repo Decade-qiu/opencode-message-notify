@@ -1,0 +1,44 @@
+{
+  "name": "@decade-qzj/opencode-message-notify",
+  "version": "0.1.2",
+  "description": "OpenCode plugin that sends detailed Agent messages and usage statistics to iOS via Bark app",
+  "author": "decade-qzj",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Decade-qiu/opencode-message-notify.git"
+  },
+  "homepage": "https://github.com/Decade-qiu/opencode-message-notify#readme",
+  "bugs": {
+    "url": "https://github.com/Decade-qiu/opencode-message-notify/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "bark",
+    "ios",
+    "notifications",
+    "notify",
+    "agent",
+    "messages"
+  ],
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.0.224",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
+}
