@@ -22,7 +22,40 @@ export async function sendBarkNotification(
 
   const encodedTitle = encodeURIComponent(title);
   const encodedBody = encodeURIComponent(body.trim());
-  const url = `https://api.day.app/${config.token}/${encodedTitle}/${encodedBody}`;
+
+  // Build URL path
+  let path = `/${config.token}/${encodedTitle}`;
+  if (config.subtitle?.trim()) {
+    path += `/${encodeURIComponent(config.subtitle.trim())}`;
+  }
+  path += `/${encodedBody}`;
+
+  // Build query parameters
+  const params = new URLSearchParams();
+  if (config.url?.trim()) {
+    params.append("url", config.url.trim());
+  }
+  if (config.group?.trim()) {
+    params.append("group", config.group.trim());
+  }
+  if (config.icon?.trim()) {
+    params.append("icon", config.icon.trim());
+  }
+  if (config.sound?.trim()) {
+    params.append("sound", config.sound.trim());
+  }
+  if (config.call !== undefined && config.call !== null) {
+    params.append("call", String(config.call));
+  }
+  if (config.ciphertext?.trim()) {
+    params.append("ciphertext", config.ciphertext.trim());
+  }
+  if (config.level?.trim()) {
+    params.append("level", config.level.trim());
+  }
+
+  const queryString = params.toString();
+  const url = `https://api.day.app${path}${queryString ? `?${queryString}` : ""}`;
 
   try {
     await fetch(url);

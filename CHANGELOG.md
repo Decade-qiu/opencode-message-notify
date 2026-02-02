@@ -51,9 +51,14 @@ Unlike `opencode-notifier` and `opencode-notificator`, this plugin:
 
 ## [Unreleased]
 
+### Added
+
+- Support for additional Bark API parameters: subtitle, url, group, icon, sound, call, ciphertext, level
+- Environment variable support for all new configuration options (DAY_APP_SUBTITLE, DAY_APP_URL, DAY_APP_GROUP, DAY_APP_ICON, DAY_APP_SOUND, DAY_APP_CALL, DAY_APP_CIPHERTEXT, DAY_APP_LEVEL)
+- Backward compatibility for config file names (supports both opencode-notify.json and opencode-message-notify.json)
+
 ### Planned
 
-- Support for custom notification sounds via Bark
 - Batch notification mode for long sessions
 - Usage limit alerts
 - Multi-device support

@@ -108,6 +108,14 @@ Create `~/.config/opencode/opencode-notify.json`:
 {
   "token": "your_bark_device_token",
   "title": "OpenCode",
+  "subtitle": "Agent Task",
+  "url": "https://github.com/...",
+  "group": "opencode",
+  "icon": "https://example.com/icon.png",
+  "sound": "alarm",
+  "call": 1,
+  "ciphertext": "...",
+  "level": "timeSensitive",
   "notifyOnComplete": true,
   "notifyOnPermission": true,
   "includeUsageStats": true,
@@ -121,6 +129,14 @@ Create `~/.config/opencode/opencode-notify.json`:
 |--------|------|---------|-------------|
 | `token` | string | (env) | Bark device token |
 | `title` | string | `"OpenCode"` | Notification title prefix |
+| `subtitle` | string | undefined | Notification subtitle (iOS path parameter) |
+| `url` | string | undefined | URL to open when notification is clicked |
+| `group` | string | undefined | Notification group name for grouping |
+| `icon` | string | undefined | Custom notification icon URL (iOS 15+) |
+| `sound` | string | undefined | Notification sound name |
+| `call` | string/number | undefined | Repeat sound for 30 seconds |
+| `ciphertext` | string | undefined | Encrypted message content |
+| `level` | string | undefined | Notification level: active, timeSensitive, passive, critical |
 | `notifyOnComplete` | boolean | `true` | Send notification on session completion |
 | `notifyOnPermission` | boolean | `true` | Send notification for permission requests |
 | `includeUsageStats` | boolean | `true` | Include cost and token statistics |

@@ -16,6 +16,22 @@ export interface PluginConfig {
   token?: string;
   /** Notification title template */
   title?: string;
+  /** Notification subtitle (iOS path parameter) */
+  subtitle?: string;
+  /** URL to open when notification is clicked */
+  url?: string;
+  /** Notification group name for grouping */
+  group?: string;
+  /** Custom notification icon URL (iOS 15+) */
+  icon?: string;
+  /** Notification sound name */
+  sound?: string;
+  /** Repeat sound for 30 seconds */
+  call?: string | number;
+  /** Encrypted message content */
+  ciphertext?: string;
+  /** Notification level: active, timeSensitive, passive, critical */
+  level?: 'active' | 'timeSensitive' | 'passive' | 'critical';
   /** Whether to send notifications on session completion */
   notifyOnComplete?: boolean;
   /** Whether to send notifications on permission requests */
