@@ -91,13 +91,22 @@ Get-Content "$env:USERPROFILE\.cache\opencode\node_modules\@decade-qzj\opencode-
 
 ## Configuration
 
-### Environment Variable (Recommended)
+### Environment Variables (Recommended)
 
-Set the `DAY_APP_TOKEN` environment variable in your shell profile:
+Set these environment variables in your shell profile:
 
 ```bash
 # Add to your ~/.zshrc or ~/.bashrc
 export DAY_APP_TOKEN="your_bark_device_token"
+export DAY_APP_TITLE="OpenCode"
+export DAY_APP_SUBTITLE="Agent Task"
+export DAY_APP_URL="https://github.com/..."
+export DAY_APP_GROUP="opencode"
+export DAY_APP_ICON="https://example.com/icon.png"
+export DAY_APP_SOUND="alarm"
+export DAY_APP_CALL="1"
+export DAY_APP_CIPHERTEXT="..."
+export DAY_APP_LEVEL="timeSensitive"
 ```
 
 ### Config File
