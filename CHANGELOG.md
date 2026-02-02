@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-02-02
+
+### Added
+
+- Support for additional Bark API parameters: subtitle, url, group, icon, sound, call, ciphertext, level
+- Environment variable support for all new configuration options (DAY_APP_SUBTITLE, DAY_APP_URL, DAY_APP_GROUP, DAY_APP_ICON, DAY_APP_SOUND, DAY_APP_CALL, DAY_APP_CIPHERTEXT, DAY_APP_LEVEL)
+- Backward compatibility for config file names (supports both opencode-notify.json and opencode-message-notify.json)
+
 ## [0.1.2] - 2025-01-11
 
 ### Fixed
@@ -50,12 +58,6 @@ Unlike `opencode-notifier` and `opencode-notificator`, this plugin:
 - Does not include desktop notifications or sound alerts
 
 ## [Unreleased]
-
-### Added
-
-- Support for additional Bark API parameters: subtitle, url, group, icon, sound, call, ciphertext, level
-- Environment variable support for all new configuration options (DAY_APP_SUBTITLE, DAY_APP_URL, DAY_APP_GROUP, DAY_APP_ICON, DAY_APP_SOUND, DAY_APP_CALL, DAY_APP_CIPHERTEXT, DAY_APP_LEVEL)
-- Backward compatibility for config file names (supports both opencode-notify.json and opencode-message-notify.json)
 
 ### Planned
 
