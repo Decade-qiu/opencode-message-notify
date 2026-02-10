@@ -60,6 +60,26 @@ export const DayAppHooksPlugin: Plugin = async ({ project }) => {
           }
         }
 
+        // Handle question tool usage
+        if (event.type === "message.part.updated" && config.notifyOnQuestion) {
+          const { part } = event.properties || {};
+          if (part?.type === "tool" && part.tool === "question" && part.state?.status === "running") {
+            const questions = Array.isArray(part.state?.input?.questions)
+              ? part.state.input.questions
+              : [];
+            const total = questions.length;
+            const firstQuestion = questions[0]?.question;
+            let message = "❓ Need your input";
+            if (total > 0) {
+              message = `❓ ${total} question${total > 1 ? "s" : ""}`;
+              if (firstQuestion) {
+                message = `${message}: ${firstQuestion}`;
+              }
+            }
+            await send(message);
+          }
+        }
+
         // Handle session completion
         if (event.type === "session.idle" && config.notifyOnComplete) {
           let summary = "";

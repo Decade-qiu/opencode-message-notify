@@ -36,14 +36,22 @@ export interface PluginConfig {
   notifyOnComplete?: boolean;
   /** Whether to send notifications on permission requests */
   notifyOnPermission?: boolean;
+  /** Whether to send notifications on question tool requests */
+  notifyOnQuestion?: boolean;
   /** Whether to include usage statistics in notifications */
   includeUsageStats?: boolean;
   /** Whether to include the actual agent message content */
   includeMessageContent?: boolean;
 }
 
-export interface StepPart {
-  type: string;
+export interface TextPart {
+  type: "text";
+  messageID?: string;
+  text?: string;
+}
+
+export interface StepFinishPart {
+  type: "step-finish";
   cost?: number;
   tokens?: {
     input?: number;
@@ -54,9 +62,34 @@ export interface StepPart {
       write?: number;
     };
   };
-  messageID?: string;
-  text?: string;
 }
+
+export interface ToolPartState {
+  status?: "pending" | "running" | "completed" | "error" | string;
+  input?: {
+    [key: string]: unknown;
+    questions?: Array<{
+      question?: string;
+      header?: string;
+    }>;
+  };
+  title?: string;
+  metadata?: {
+    [key: string]: unknown;
+  };
+}
+
+export interface ToolPart {
+  type: "tool";
+  id?: string;
+  sessionID?: string;
+  messageID?: string;
+  callID?: string;
+  tool: string;
+  state?: ToolPartState;
+}
+
+export type StepPart = TextPart | StepFinishPart | ToolPart;
 
 export interface EventProperties {
   part?: StepPart;

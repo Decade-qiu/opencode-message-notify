@@ -42,6 +42,7 @@ export function loadConfig(): PluginConfig {
   const defaultConfig: PluginConfig = {
     notifyOnComplete: true,
     notifyOnPermission: true,
+    notifyOnQuestion: true,
     includeUsageStats: true,
     includeMessageContent: true,
     title: "OpenCode",
