@@ -63,6 +63,9 @@ export function loadConfig(): PluginConfig {
   if (process.env.DAY_APP_TOKEN?.trim()) {
     defaultConfig.token = process.env.DAY_APP_TOKEN.trim();
   }
+  if (process.env.DAY_APP_SERVER?.trim()) {
+    defaultConfig.server = process.env.DAY_APP_SERVER.trim();
+  }
   if (process.env.DAY_APP_TITLE?.trim()) {
     defaultConfig.title = process.env.DAY_APP_TITLE.trim();
   }

@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-10-05
+### Added
+* OpenCode v2 support via the new v2 plugin API, so one package serves both versions: v2 calls `setup()`, v1 (1.18.29 or newer) calls `server()`. Turn completion and failure notifications use the v2 `session.execution.succeeded` and `session.execution.failed` events.
+* Plugin options for OpenCode v2, configurable inline under the plugin's `options` key in `plugins`, taking precedence over environment variables and the config file.
+* `server` config option (and `DAY_APP_SERVER` environment variable) to target a self-hosted Bark server, because the base URL was previously hardcoded to `https://api.day.app`, so every push from a self-hosted setup was rejected with a "device token not found" error.
+### Fixed
+* Session notifications in OpenCode v2 now track message content and usage statistics per session and only notify for sessions in the plugin's own project, so concurrent or multi-project sessions no longer mix into or duplicate each other's notifications.
+* Bark push failures are no longer silent: rejected responses and network errors are logged to the OpenCode console, so a wrong token or server now shows up instead of looking like missing notifications.
 ## [0.2.0] - 2026-02-02
 
 ### Added

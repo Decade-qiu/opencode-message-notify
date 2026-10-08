@@ -14,6 +14,8 @@ export interface UsageStats {
 export interface PluginConfig {
   /** Bark app token for iOS notifications */
   token?: string;
+  /** Bark server base URL, for self-hosted servers */
+  server?: string;
   /** Notification title template */
   title?: string;
   /** Notification subtitle (iOS path parameter) */

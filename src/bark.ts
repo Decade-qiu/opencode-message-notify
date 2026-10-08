@@ -55,12 +55,20 @@ export async function sendBarkNotification(
   }
 
   const queryString = params.toString();
-  const url = `https://api.day.app${path}${queryString ? `?${queryString}` : ""}`;
+  // Self-hosted Bark servers use the same path shape; trailing slashes are
+  // stripped so "https://host/" does not produce a double slash.
+  const baseUrl = config.server?.trim().replace(/\/+$/, "") || "https://api.day.app";
+  const url = `${baseUrl}${path}${queryString ? `?${queryString}` : ""}`;
 
   try {
-    await fetch(url);
-  } catch {
-    // Silently fail - notifications should not break the plugin
+    const response = await fetch(url);
+    if (!response.ok) {
+      const detail = await response.text().catch(() => "");
+      console.error(`[opencode-message-notify] Bark server rejected push (${response.status}): ${detail}`);
+    }
+  } catch (error) {
+    // Notification failures must not break the plugin, but they must be visible
+    console.error(`[opencode-message-notify] Bark push failed:`, error);
   }
 }
 
