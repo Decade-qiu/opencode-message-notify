@@ -2,17 +2,29 @@
 
 OpenCode plugin that sends **detailed Agent messages** and **usage statistics** to your iOS device via the [Bark](https://apps.apple.com/us/app/bark-cellular-notifications/id1525758998) app.
 
+Works with both OpenCode v2 and v1 1.18.29 or newer (v2 calls the plugin's `setup()`, v1 calls its `server()`; older v1 releases should pin a 0.2.x version).
+
 ## Features
 
 - **Real-time iOS notifications** via Bark app - get notified anywhere
 - **Detailed Agent message content** - see exactly what your Agent is telling you, not just "task completed"
 - **Usage statistics tracking** - monitor cost, tokens, and cache usage
 - **Permission request notifications** - never miss a permission prompt
-- **Zero dependencies** - lightweight and fast
+- **No bundled dependencies** - relies only on the OpenCode plugin API
 
 ## Installation
 
-Add the plugin to your `opencode.json` or `opencode.jsonc`:
+Add the plugin to your `opencode.json` or `opencode.jsonc`.
+
+**OpenCode v2:**
+
+```json
+{
+  "plugins": ["@decade-qzj/opencode-message-notify@latest"]
+}
+```
+
+**OpenCode v1:**
 
 ```json
 {
@@ -26,7 +38,7 @@ To pin a specific version:
 
 ```json
 {
-  "plugin": ["@decade-qzj/opencode-message-notify@0.1.0"]
+  "plugins": ["@decade-qzj/opencode-message-notify@0.3.0"]
 }
 ```
 
@@ -91,6 +103,26 @@ Get-Content "$env:USERPROFILE\.cache\opencode\node_modules\@decade-qzj\opencode-
 
 ## Configuration
 
+Every option in the table below can be configured three ways:
+
+1. **Plugin options (OpenCode v2)** — pass them inline under the plugin's `options` key:
+   ```json
+   {
+     "plugins": [
+       {
+         "package": "@decade-qzj/opencode-message-notify@latest",
+         "options": {
+           "token": "your_bark_device_token"
+         }
+       }
+     ]
+   }
+   ```
+2. **Environment variables** — recommended for v1 and simplest across projects
+3. **Config file** — `~/.config/opencode/opencode-notify.json`
+
+Plugin options take precedence over environment variables and the config file.
+
 ### Environment Variables (Recommended)
 
 Set these environment variables in your shell profile:
@@ -152,6 +184,15 @@ Create `~/.config/opencode/opencode-notify.json`:
 | `includeMessageContent` | boolean | `true` | Include Agent's actual message content |
 
 ## How It Works
+
+### When you get notified
+
+- **✅ Turn completed** - the agent finished its current turn (your prompt is answered)
+- **⛔ Turn failed** - the turn ended with an error, including the error message
+- **🔐 Permission request** - the agent needs you to approve an action
+- **❓ Question** - the agent asked you a question and is waiting
+
+Turns that you interrupt are deliberately not notified.
 
 ### Message Content
 
@@ -222,6 +263,12 @@ curl "https://api.day.app/YOUR_TOKEN/Test/Hello%20World"
 
 ```bash
 npm run build
+```
+
+### Testing
+
+```bash
+npm test
 ```
 
 ### Type checking
